@@ -1,51 +1,14 @@
 <template>
-	<div id="app">
-		<label>
-			type name of new board and hit enter
-			<input v-on:keyup.enter="boards.push({name: $event.target.value, categories: []})"/>
-		</label>
-		<draggable v-model="boards">
-		<div class="board" v-for="board in boards">
-			<label>
-				edit board name
-				<input v-model="board.name"/>
-			</label>
-			<br>
-			<label>
-				type name of new category in {{ board.name }}
-				<input v-on:keyup.enter="board.categories.push({name: $event.target.value, cards: []})"/>
-				<div class="container">
-					<draggable v-model="board.categories">
-					<div v-for="category in board.categories">
-						<label>
-							edit category name
-							<input v-model="category.name">
-						</label>
-						<br>
-						<label>
-							type name of new card in {{ category.name }}
-							<input v-on:keyup.enter="category.cards.push({name: $event.target.value})"/>
-						</label>
-						<draggable v-model="category.cards">
-						<div v-for="card in category.cards" v-on:dblclick="category.cards.splice(category.cards.findIndex(element => element.name === card.name), 1)">
-							{{ card.name }}
-						</div>
-						</draggable>
-					</div>
-					</draggable>
-				</div>
-			</label>
-		</div>
-		</draggable>
-	</div>
+	<recursive id="app" v-bind:recurse="'.boards'" v-bind:levels="['board', 'category', 'card']"></recursive>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+
+import recursive from './components/recursive.vue'
 export default {
 	name: 'app',
 	components: {
-		draggable
+		recursive
 	},
 	data: function() {
 		return {
@@ -56,13 +19,19 @@ export default {
 </script>
 
 <style>
-.container > div {
+.category {
 	display: flex;
 }
-.container > div > div {
+.category > div {
 	border-style: dotted;
 }
-.board {
+.card {
+	border-style: outset;
+}
+.card > div {
+	border-style: double;
+}
+.board > div {
 	border-style: groove;
 }
 </style>
