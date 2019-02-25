@@ -4,7 +4,7 @@
 		type name of new {{ levels[0] }}
 		<input v-on:keyup.enter="n($event.target)"/>
 	</label>
-	<draggable v-bind:class="levels[0]" v-model="real">
+	<draggable v-bind:class="levels[0]" v-model="real" v-bind:options="{group: levels[0]}">
 		<div v-for="(r, i) in real">
 			<label v-on:dblclick="real.splice(real.findIndex(e => e.name === r.name), 1)">
 				edit {{ levels[0] }} name
