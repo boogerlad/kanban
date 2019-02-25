@@ -10,7 +10,7 @@
 				edit {{ levels[0] }} name
 				<input v-model="r.name"/>
 			</label>
-			<recursive v-if="levels[1]" v-bind:recurse="recurse + '[' + i + '][\'' + levels[0] + '\']'" v-bind:levels="levels.slice(1)"></recursive>
+			<recursive v-if="levels[1]" v-bind:recurse="recurse + '[' + i + '].' + levels[1]" v-bind:levels="levels.slice(1)"></recursive>
 		</div>
 	</draggable>
 </div>
@@ -42,7 +42,7 @@ export default {
 			//console.log(.boards);
 			if(v.value) {
 				let obj = { name: v.value };
-				obj[this.levels[0]] = [];
+				obj[this.levels[1]] = [];
 				this.real.push(obj);
 				v.value = "";
 			} else {
