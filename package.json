@@ -7,7 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "vue": "^2.6.6"
+    "vue": "^2.6.6",
+    "vuedraggable": "^2.18.0"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.4.0",
